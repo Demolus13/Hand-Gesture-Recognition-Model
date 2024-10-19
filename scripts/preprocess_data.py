@@ -30,9 +30,14 @@ def normalize_landmarks(landmarks, image_shape):
             min(int(landmark.y * image_height), image_height - 1)
         ])
 
+    # Convert to NumPy array for vectorized operations
+    normalized_landmarks = np.array(normalized_landmarks, dtype=np.float32)
+    
+    # Normalize landmarks
     normalized_landmarks = normalized_landmarks - normalized_landmarks[0]
-    normalize_landmarks = normalize_landmarks / np.max(normalized_landmarks)
-    return np.array(normalized_landmarks).flatten()
+    normalized_landmarks = normalized_landmarks / np.max(np.abs(normalized_landmarks))
+    
+    return normalized_landmarks.flatten()
 
 # Function to preprocess all images from the raw data folder and save to individual CSV files per label
 def preprocess_data_separate_csv(raw_data_path, output_csv_path):
