@@ -42,7 +42,7 @@ def normalize_landmarks(landmarks, image_shape):
 # Function to preprocess all images from the raw data folder and save to individual CSV files per label
 def preprocess_data_separate_csv(raw_data_path, output_csv_path):
     # Initialize Mediapipe hands detection
-    with mp_hands.Hands(static_image_mode=True, max_num_hands=1, min_detection_confidence=0.5) as hands:
+    with mp_hands.Hands(static_image_mode=True, max_num_hands=1, min_detection_confidence=0.7) as hands:
         
         # Loop through each folder (label) in the raw data directory
         for label in os.listdir(raw_data_path):
