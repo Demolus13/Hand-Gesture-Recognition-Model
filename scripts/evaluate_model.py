@@ -2,8 +2,11 @@ import cv2
 import torch
 import numpy as np
 import pickle
-from scripts.model import HGRModel
+from model import HGRModel
 import mediapipe as mp
+import logging
+
+logging.getLogger('your_logger_name').setLevel(logging.ERROR)  # Suppress lower severity messages
 
 # Load the label encodings
 with open('models/label_encodings.pkl', 'rb') as f:
@@ -12,7 +15,7 @@ index_to_label = {v: k for k, v in label_to_index.items()}
 
 # Load the trained model
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-model = HGRModel(in_features=21*2, num_classes=len(label_to_index))
+model = HGRModel(in_features=21*2, out_features=len(label_to_index))
 model.load_state_dict(torch.load('models/hgr_model.pth', map_location=device))
 model.to(device)
 model.eval()

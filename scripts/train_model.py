@@ -4,7 +4,7 @@ import pandas as pd
 import pickle
 
 import torch
-from scripts.model import HGRModel
+from model import HGRModel
 
 # Set the device
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -42,7 +42,7 @@ in_features = X.shape[1]
 model = HGRModel(in_features, num_classes).to(device)
 
 # Train the model
-model.fit(X, Y, epochs=100, lr=0.01)
+model.fit(X, Y, epochs=1000, lr=0.01)
 
 # Save the model and label encodings
 os.makedirs("models", exist_ok=True)

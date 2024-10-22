@@ -12,7 +12,9 @@ class HGRModel(nn.Module):
             nn.ReLU(),
             nn.Linear(16, 32),
             nn.ReLU(),
-            nn.Linear(32, out_features),
+            nn.Linear(32, 256),
+            nn.ReLU(),
+            nn.Linear(256, out_features),
             nn.Softmax(dim=1)  # Add softmax layer
         )
         
