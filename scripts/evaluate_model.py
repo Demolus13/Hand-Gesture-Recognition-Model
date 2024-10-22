@@ -1,12 +1,10 @@
 import cv2
 import torch
 import numpy as np
+
 import pickle
 from model import HGRModel
 import mediapipe as mp
-import logging
-
-logging.getLogger('your_logger_name').setLevel(logging.ERROR)  # Suppress lower severity messages
 
 # Load the label encodings
 with open('models/label_encodings.pkl', 'rb') as f:
@@ -68,6 +66,9 @@ def preprocess_frame(frame):
 
 # Open a connection to the camera
 cap = cv2.VideoCapture(0)
+if not cap.isOpened():
+    print("Error: Could not open camera.")
+    exit()
 
 while True:
     ret, frame = cap.read()
